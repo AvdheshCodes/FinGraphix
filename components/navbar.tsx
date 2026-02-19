@@ -91,11 +91,11 @@ export function Navbar() {
             "flex items-center justify-between rounded-2xl px-5 py-3",
           )}
           style={{
-            background: "rgba(255,255,255,0.12)",
-            backdropFilter: "blur(16px)",
-            WebkitBackdropFilter: "blur(16px)",
-            border: "1px solid rgba(255,255,255,0.15)",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.06)",
+            background: "rgba(255,255,255,0.05)",
+            backdropFilter: "blur(20px)",
+            WebkitBackdropFilter: "blur(20px)",
+            border: "1px solid rgba(255,255,255,0.08)",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.03)",
           }}
         >
           {/* Logo + Title */}
