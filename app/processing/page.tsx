@@ -15,22 +15,12 @@ export default function ProcessingPage() {
       return
     }
 
-    // After 3.5s, trigger fade-out; after fade completes (3s), navigate
-    const fadeTimer = setTimeout(() => {
-      const trigger = (window as unknown as Record<string, unknown>).__triggerProcessingFadeOut
-      if (typeof trigger === "function") {
-        ;(trigger as () => void)()
-      }
+    // Show the processing animation for a minimum duration then redirect
+    const timer = setTimeout(() => {
+      router.replace(`/explore?datasetId=${datasetId}`)
     }, 3500)
 
-    const navTimer = setTimeout(() => {
-      router.replace(`/explore?datasetId=${datasetId}`)
-    }, 6500) // 3.5s display + 3s fade-out
-
-    return () => {
-      clearTimeout(fadeTimer)
-      clearTimeout(navTimer)
-    }
+    return () => clearTimeout(timer)
   }, [datasetId, router])
 
   return <FinancialLoading />
