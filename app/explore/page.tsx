@@ -2,9 +2,10 @@
 
 import { useEffect, useState, useCallback, Suspense } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
-import { ArrowLeft, AlertCircle } from "lucide-react"
+import { AlertCircle } from "lucide-react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { FinancialLoading } from "@/components/financial-loading"
 import { DatasetSummary } from "@/components/dataset-summary"
 import { ChartGrid } from "@/components/chart-grid"
 import { ChartExpandedModal } from "@/components/chart-expanded-modal"
@@ -104,26 +105,18 @@ function ExploreContent() {
   }, [])
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="flex flex-col items-center gap-4">
-          <div className="h-10 w-10 animate-spin rounded-full border-4 border-muted border-t-primary" />
-          <p className="text-muted-foreground">Loading dataset...</p>
-        </div>
-      </div>
-    )
+    return <FinancialLoading />
   }
 
   if (error || !profile) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center pt-20">
         <div className="flex flex-col items-center gap-4 text-center max-w-md">
           <AlertCircle className="h-12 w-12 text-destructive" />
-          <h2 className="text-xl font-semibold">Something went wrong</h2>
+          <h2 className="text-xl font-semibold text-foreground">Something went wrong</h2>
           <p className="text-muted-foreground">{error || "Dataset not found"}</p>
           <Button asChild>
             <Link href="/">
-              <ArrowLeft className="mr-2 h-4 w-4" />
               Upload a new file
             </Link>
           </Button>
@@ -133,30 +126,20 @@ function ExploreContent() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <header className="border-b border-border/50 bg-background/80 backdrop-blur-md sticky top-0 z-40">
-        <div className="container mx-auto flex items-center justify-between h-14 px-4">
-          <div className="flex items-center gap-4">
-            <Link
-              href="/"
-              className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              New Upload
-            </Link>
-            <div className="h-4 w-px bg-border" />
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-primary">{profile.rowCount.toLocaleString()}</span>
-              <span className="text-sm text-muted-foreground">rows</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-muted-foreground bg-muted/50 px-2 py-1 rounded-full">
+    <div className="min-h-screen bg-background animate-in fade-in duration-500">
+      {/* Dataset info bar below the global navbar */}
+      <div className="sticky top-[72px] z-30 border-b border-border/50 bg-card/60 backdrop-blur-xl">
+        <div className="container mx-auto flex items-center justify-between h-11 px-4">
+          <div className="flex items-center gap-3">
+            <span className="text-sm font-medium text-primary">{profile.rowCount.toLocaleString()}</span>
+            <span className="text-sm text-muted-foreground">rows</span>
+            <div className="h-3.5 w-px bg-border" />
+            <span className="text-xs text-muted-foreground bg-muted/50 px-2 py-0.5 rounded-full">
               {profile.columns.length} columns
             </span>
           </div>
         </div>
-      </header>
+      </div>
 
       <div className="container mx-auto px-4 py-6">
         <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-6">
