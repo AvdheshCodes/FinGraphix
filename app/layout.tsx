@@ -5,8 +5,8 @@ import { Analytics } from '@vercel/analytics/next'
 import { Navbar } from '@/components/navbar'
 import './globals.css'
 
-const _inter = Inter({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
+const geistMono = Geist_Mono({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: 'FinGraphix - Financial Forensic Engine',
@@ -38,7 +38,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`font-sans antialiased`}>
+      <body className={`${inter.className} ${geistMono.variable} font-sans antialiased`}>
         <Navbar />
         {children}
         <Analytics />
