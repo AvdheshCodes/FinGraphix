@@ -127,8 +127,8 @@ function ExploreContent() {
 
   return (
     <div className="min-h-screen bg-background animate-in fade-in duration-500">
-      {/* Dataset info bar below the global navbar */}
-      <div className="sticky top-[72px] z-30 border-b border-border/50 bg-card/60 backdrop-blur-xl">
+      {/* Dataset info bar at the top (navbar is hidden on this page) */}
+      <div className="sticky top-0 z-30 border-b border-border/50 bg-card/60 backdrop-blur-xl">
         <div className="container mx-auto flex items-center justify-between h-11 px-4">
           <div className="flex items-center gap-3">
             <span className="text-sm font-medium text-primary">{profile.rowCount.toLocaleString()}</span>

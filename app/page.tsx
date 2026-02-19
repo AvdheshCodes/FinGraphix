@@ -30,24 +30,47 @@ export default function UploadPage() {
   }
 
   return (
-    <main className="min-h-screen bg-background relative overflow-hidden animate-in fade-in duration-500">
-      {/* Subtle gradient background accent */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none" />
+    <main className="min-h-screen relative overflow-hidden animate-in fade-in duration-500" style={{ background: "#000000" }}>
+      {/* Radial gradient: dark blue core fading to deep black edges */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 80% 60% at 50% 45%, #0f1f3d 0%, #1e1e1e 40%, #000000 100%)",
+        }}
+      />
+      {/* Subtle noise texture overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-[0.035]"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
+          backgroundRepeat: "repeat",
+          backgroundSize: "128px 128px",
+        }}
+      />
+      {/* Slow ambient glow */}
+      <div className="absolute inset-0 pointer-events-none animate-ambient-glow">
+        <div
+          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full"
+          style={{
+            background: "radial-gradient(ellipse, rgba(15,31,61,0.4) 0%, transparent 70%)",
+          }}
+        />
+      </div>
 
       <div className="container relative mx-auto flex min-h-screen flex-col items-center justify-center px-4 pt-28 pb-16">
         <div className="w-full max-w-xl space-y-8">
           <div className="text-center space-y-3">
-            <div className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-sm text-primary mb-2">
+            <div className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-sm mb-2" style={{ background: "rgba(79,156,255,0.12)", color: "#4f9cff" }}>
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: "#4f9cff" }} />
+                <span className="relative inline-flex rounded-full h-2 w-2" style={{ background: "#4f9cff" }} />
               </span>
               Financial Forensics
             </div>
-            <h1 className="text-4xl font-bold tracking-tight text-foreground text-balance">
+            <h1 className="text-4xl font-bold tracking-tight text-balance" style={{ color: "#f0f0f0" }}>
               Financial Forensic Engine
             </h1>
-            <p className="text-muted-foreground text-lg text-pretty">
+            <p className="text-lg text-pretty" style={{ color: "rgba(255,255,255,0.55)" }}>
               Upload financial data for instant forensic insights and guided exploration
             </p>
           </div>

@@ -98,11 +98,15 @@ export function UploadDropzone() {
   return (
     <Card
       className={cn(
-        "border-2 border-dashed transition-all duration-200 bg-card/50 backdrop-blur-sm",
+        "border border-dashed transition-all duration-300 rounded-xl",
+        "bg-white/[0.04] backdrop-blur-sm",
+        "animate-border-glow",
+        "hover:scale-[1.02] hover:bg-white/[0.06]",
         isDragging && "border-primary bg-primary/10 scale-[1.02]",
-        error && "border-destructive",
-        !isDragging && !error && "border-border/50 hover:border-primary/30"
+        error && "border-destructive shadow-none",
+        !isDragging && !error && "border-white/[0.12]"
       )}
+      style={{ borderRadius: "12px" }}
     >
       <CardContent className="p-0">
         <div
@@ -120,7 +124,7 @@ export function UploadDropzone() {
             <>
               <div className={cn(
                 "rounded-full p-4 transition-colors",
-                isDragging ? "bg-primary/20" : "bg-muted",
+                isDragging ? "bg-primary/20" : "bg-white/[0.06]",
                 error && "bg-destructive/10"
               )}>
                 {error ? (
@@ -128,15 +132,15 @@ export function UploadDropzone() {
                 ) : isDragging ? (
                   <FileSpreadsheet className="h-8 w-8 text-primary" />
                 ) : (
-                  <Upload className="h-8 w-8 text-muted-foreground" />
+                  <Upload className="h-8 w-8" style={{ color: "rgba(255,255,255,0.45)" }} />
                 )}
               </div>
 
               <div className="text-center">
-                <p className="text-lg font-medium">
+                <p className="text-lg font-medium" style={{ color: "rgba(255,255,255,0.85)" }}>
                   {isDragging ? "Drop your CSV file here" : "Upload your CSV file"}
                 </p>
-                <p className="mt-1 text-sm text-muted-foreground">
+                <p className="mt-1 text-sm" style={{ color: "rgba(255,255,255,0.45)" }}>
                   Drag and drop or click to browse
                 </p>
               </div>
@@ -147,7 +151,7 @@ export function UploadDropzone() {
 
               <div className="flex flex-col items-center gap-2">
                 <label>
-                  <Button variant="outline" asChild disabled={isUploading} className="border-primary/30 hover:bg-primary/10 hover:border-primary/50 bg-transparent">
+                  <Button variant="outline" asChild disabled={isUploading} className="border-white/[0.15] hover:bg-white/[0.08] hover:border-white/[0.25] bg-transparent text-white/80">
                     <span className="cursor-pointer">
                       Choose File
                       <input
@@ -161,7 +165,7 @@ export function UploadDropzone() {
                   </Button>
                 </label>
 
-                <p className="text-xs text-muted-foreground">
+                <p className="text-xs" style={{ color: "rgba(255,255,255,0.35)" }}>
                   Max {MAX_SIZE_MB}MB, up to {MAX_ROWS.toLocaleString()} rows
                 </p>
               </div>

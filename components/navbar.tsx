@@ -12,11 +12,17 @@ const NAV_ITEMS = [
   { label: "History", href: "/history" },
 ]
 
+const HIDDEN_PATHS = ["/explore", "/processing"]
+
 export function Navbar() {
   const pathname = usePathname()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [sliderStyle, setSliderStyle] = useState<{ left: number; width: number } | null>(null)
   const navRefs = useRef<(HTMLAnchorElement | null)[]>([])
+
+  const shouldHide = HIDDEN_PATHS.some(
+    (p) => pathname === p || pathname.startsWith(p + "/") || pathname.startsWith(p + "?")
+  )
 
   const activeIndex = NAV_ITEMS.findIndex(
     (item) => item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
@@ -34,7 +40,12 @@ export function Navbar() {
   }, [targetIndex])
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50">
+    <nav
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-400 ease-in-out",
+        shouldHide ? "opacity-0 -translate-y-full pointer-events-none" : "opacity-100 translate-y-0"
+      )}
+    >
       <div className="mx-auto max-w-5xl px-4 pt-4">
         <div
           className={cn(
