@@ -13,7 +13,7 @@ const NAV_ITEMS = [
 ]
 
 const SCROLL_THRESHOLD = 12
-const DEBOUNCE_MS = 50
+const DEBOUNCE_MS = 0
 
 export function Navbar() {
   const pathname = usePathname()
@@ -81,7 +81,7 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-350 ease-in-out",
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-150 ease-out",
         visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
       )}
     >
