@@ -82,7 +82,8 @@ export default function UploadPage() {
             <Button
               onClick={handleLoadSample}
               disabled={isLoadingSample}
-              className="px-8 py-5 text-base font-medium"
+              className="px-8 py-5 text-base font-medium text-white hover:brightness-110"
+              style={{ background: "#22c55e" }}
             >
               {isLoadingSample ? (
                 <>
