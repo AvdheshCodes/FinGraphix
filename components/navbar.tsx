@@ -41,11 +41,11 @@ export function Navbar() {
             "flex items-center justify-between rounded-2xl px-5 py-3",
           )}
           style={{
-            background: "rgba(255,255,255,0.65)",
-            backdropFilter: "blur(12px)",
-            WebkitBackdropFilter: "blur(12px)",
-            border: "1px solid rgba(255,255,255,0.4)",
-            boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+            background: "rgba(255,255,255,0.12)",
+            backdropFilter: "blur(16px)",
+            WebkitBackdropFilter: "blur(16px)",
+            border: "1px solid rgba(255,255,255,0.15)",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.06)",
           }}
         >
           {/* Logo + Title */}
@@ -60,8 +60,7 @@ export function Navbar() {
               />
             </div>
             <span
-              className="text-lg font-semibold tracking-tight transition-colors"
-              style={{ color: "#111111" }}
+              className="text-lg font-semibold tracking-tight transition-colors text-foreground"
             >
               FinGraphix
             </span>
@@ -79,8 +78,8 @@ export function Navbar() {
                 style={{
                   left: sliderStyle.left,
                   width: sliderStyle.width,
-                  background: "rgba(255,255,255,0.9)",
-                  boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+                  background: "rgba(255,255,255,0.15)",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.04)",
                   borderRadius: "999px",
                   transitionDuration: "300ms",
                 }}
@@ -99,11 +98,14 @@ export function Navbar() {
                   ref={(el) => { navRefs.current[i] = el }}
                   href={item.href}
                   onMouseEnter={() => setHoveredIndex(i)}
-                  className="relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200"
+                  className={cn(
+                    "relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200",
+                    isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground"
+                  )}
                   style={{
                     borderRadius: "999px",
-                    color: isActive ? "#111111" : "rgba(17,17,17,0.55)",
                   }}
+                  data-active={isActive ? "" : undefined}
                   onFocus={() => setHoveredIndex(i)}
                 >
                   {item.label}
