@@ -30,29 +30,36 @@ export default function UploadPage() {
   }
 
   return (
-    <main className="min-h-screen relative overflow-hidden animate-in fade-in duration-500" style={{ background: "#000000" }}>
-      {/* Radial gradient: dark blue core fading to deep black edges */}
+    <main className="min-h-screen relative overflow-hidden animate-in fade-in duration-500" style={{ background: "#020617" }}>
+      {/* Deep black-blue layered gradients */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
-          background: "radial-gradient(ellipse 80% 60% at 50% 45%, #0f1f3d 0%, #1e1e1e 40%, #000000 100%)",
+          background: "radial-gradient(ellipse 70% 50% at 50% 40%, #0a1628 0%, #050d1a 45%, #020617 100%)",
+        }}
+      />
+      {/* Secondary subtle blue accent glow */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background: "radial-gradient(ellipse 40% 35% at 30% 60%, rgba(15,23,42,0.6) 0%, transparent 100%)",
         }}
       />
       {/* Subtle noise texture overlay */}
       <div
-        className="absolute inset-0 pointer-events-none opacity-[0.035]"
+        className="absolute inset-0 pointer-events-none opacity-[0.03]"
         style={{
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`,
           backgroundRepeat: "repeat",
           backgroundSize: "128px 128px",
         }}
       />
-      {/* Slow ambient glow */}
+      {/* Slow ambient glow - deep blue pulse */}
       <div className="absolute inset-0 pointer-events-none animate-ambient-glow">
         <div
-          className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] rounded-full"
+          className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[450px] rounded-full"
           style={{
-            background: "radial-gradient(ellipse, rgba(15,31,61,0.4) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse, rgba(10,22,40,0.5) 0%, rgba(5,13,26,0.2) 50%, transparent 75%)",
           }}
         />
       </div>
