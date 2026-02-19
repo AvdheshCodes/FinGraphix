@@ -54,7 +54,7 @@ export function UploadDropzone() {
         saveDatasetToLocalStorage(data.storedDataset)
       }
       
-      router.push(`/explore?datasetId=${data.datasetId}`)
+      router.push(`/processing?datasetId=${data.datasetId}`)
     } catch (err) {
       setError(err instanceof Error ? err.message : "Upload failed")
     } finally {

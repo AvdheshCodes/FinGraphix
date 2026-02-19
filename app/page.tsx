@@ -2,11 +2,9 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
-import { Database } from "lucide-react"
 import { UploadDropzone } from "@/components/upload-dropzone"
 import { Button } from "@/components/ui/button"
 import { saveDatasetToLocalStorage } from "@/lib/local-storage"
-import { TITANIC_INFO } from "@/lib/sample-datasets/titanic"
 
 export default function UploadPage() {
   const router = useRouter()
@@ -23,7 +21,7 @@ export default function UploadPage() {
         saveDatasetToLocalStorage(data.storedDataset)
       }
 
-      router.push(`/explore?datasetId=${data.datasetId}`)
+      router.push(`/processing?datasetId=${data.datasetId}`)
     } catch (error) {
       console.error("Failed to load sample dataset:", error)
     } finally {
@@ -56,66 +54,22 @@ export default function UploadPage() {
 
           <UploadDropzone />
 
-          {/* Sample dataset option */}
+          {/* Generate Analysis */}
           <div className="text-center">
-            <p className="text-sm text-muted-foreground mb-3">Or try with a sample dataset</p>
             <Button
-              variant="outline"
               onClick={handleLoadSample}
               disabled={isLoadingSample}
-              className="border-primary/30 hover:bg-primary/10 hover:border-primary/50 bg-transparent"
+              className="px-8 py-5 text-base font-medium"
             >
               {isLoadingSample ? (
                 <>
-                  <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-muted border-t-primary" />
-                  Loading...
+                  <div className="mr-2 h-4 w-4 animate-spin rounded-full border-2 border-primary-foreground/30 border-t-primary-foreground" />
+                  Generating...
                 </>
               ) : (
-                <>
-                  <Database className="mr-2 h-4 w-4 text-primary" />
-                  Load {TITANIC_INFO.name} ({TITANIC_INFO.rows} rows)
-                </>
+                "Generate Analysis"
               )}
             </Button>
-          </div>
-
-          <div className="space-y-4">
-            <h2 className="text-sm font-medium text-center text-muted-foreground uppercase tracking-wider">What you can do</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-              <div className="rounded-[6px] border border-border/50 bg-card/50 p-5 backdrop-blur-sm hover:border-primary/30 transition-colors">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                  <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                  </svg>
-                </div>
-                <p className="font-medium text-foreground">Auto Overview</p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Get instant charts for distributions and relationships
-                </p>
-              </div>
-              <div className="rounded-[6px] border border-border/50 bg-card/50 p-5 backdrop-blur-sm hover:border-primary/30 transition-colors">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                  <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
-                  </svg>
-                </div>
-                <p className="font-medium text-foreground">Click to Explore</p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Enhance, filter, or generalize any chart
-                </p>
-              </div>
-              <div className="rounded-[6px] border border-border/50 bg-card/50 p-5 backdrop-blur-sm hover:border-primary/30 transition-colors">
-                <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-3">
-                  <svg className="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                  </svg>
-                </div>
-                <p className="font-medium text-foreground">AI Insights</p>
-                <p className="text-xs text-muted-foreground mt-1">
-                  Get AI-powered analysis and suggestions
-                </p>
-              </div>
-            </div>
           </div>
         </div>
       </div>
