@@ -39,14 +39,18 @@ export function Navbar() {
         <div
           className={cn(
             "flex items-center justify-between rounded-2xl px-5 py-3",
-            "bg-card/60 backdrop-blur-xl",
-            "border border-border/40",
-            "shadow-lg shadow-background/20"
           )}
+          style={{
+            background: "rgba(255,255,255,0.65)",
+            backdropFilter: "blur(12px)",
+            WebkitBackdropFilter: "blur(12px)",
+            border: "1px solid rgba(255,255,255,0.4)",
+            boxShadow: "0 8px 32px rgba(0,0,0,0.08)",
+          }}
         >
           {/* Logo + Title */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="relative h-9 w-9 overflow-hidden rounded-lg">
+          <Link href="/" className="flex items-center gap-3 group">
+            <div className="relative h-[38px] w-[38px] max-h-[42px] overflow-hidden rounded-lg">
               <Image
                 src="/fingraphix-logo.jpg"
                 alt="FinGraphix logo"
@@ -55,23 +59,30 @@ export function Navbar() {
                 priority
               />
             </div>
-            <span className="text-lg font-bold tracking-tight text-foreground group-hover:text-primary transition-colors">
+            <span
+              className="text-lg font-semibold tracking-tight transition-colors"
+              style={{ color: "#111111" }}
+            >
               FinGraphix
             </span>
           </Link>
 
-          {/* Navigation Links with Animated Slider */}
+          {/* Navigation Links with Animated Pill Slider */}
           <div
             className="relative flex items-center gap-1"
             onMouseLeave={() => setHoveredIndex(null)}
           >
-            {/* Animated slider background */}
+            {/* Animated pill slider background */}
             {sliderStyle && (
               <div
-                className="absolute top-0 h-full rounded-lg bg-primary/15 transition-all duration-300 ease-in-out"
+                className="absolute top-0 h-full transition-all ease-in-out"
                 style={{
                   left: sliderStyle.left,
                   width: sliderStyle.width,
+                  background: "rgba(255,255,255,0.9)",
+                  boxShadow: "0 4px 12px rgba(0,0,0,0.08)",
+                  borderRadius: "999px",
+                  transitionDuration: "300ms",
                 }}
               />
             )}
@@ -88,12 +99,12 @@ export function Navbar() {
                   ref={(el) => { navRefs.current[i] = el }}
                   href={item.href}
                   onMouseEnter={() => setHoveredIndex(i)}
-                  className={cn(
-                    "relative z-10 px-4 py-1.5 text-sm font-medium rounded-lg transition-colors duration-200",
-                    isActive
-                      ? "text-primary"
-                      : "text-muted-foreground hover:text-foreground"
-                  )}
+                  className="relative z-10 px-4 py-1.5 text-sm font-medium transition-colors duration-200"
+                  style={{
+                    borderRadius: "999px",
+                    color: isActive ? "#111111" : "rgba(17,17,17,0.55)",
+                  }}
+                  onFocus={() => setHoveredIndex(i)}
                 >
                   {item.label}
                 </Link>
