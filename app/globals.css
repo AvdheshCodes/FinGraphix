@@ -127,30 +127,22 @@
   }
 }
 
+/* --- Keyframes --- */
+
 @keyframes pulse {
-  0%, 100% {
-    opacity: 0.3;
-    transform: scale(0.8);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2);
-  }
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
 
 @keyframes ambient-glow {
-  0%, 100% {
-    opacity: 0.6;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.08);
-  }
+  0%, 100% { opacity: 0.6; transform: scale(1) translate(0, 0); }
+  33% { opacity: 0.85; transform: scale(1.06) translate(2%, -1%); }
+  66% { opacity: 0.75; transform: scale(1.03) translate(-1%, 1.5%); }
 }
 
 .animate-ambient-glow {
-  animation: ambient-glow 8s ease-in-out infinite;
+  animation: ambient-glow 12s ease-in-out infinite;
+  will-change: transform, opacity;
 }
 
 @keyframes border-glow {
@@ -170,4 +162,72 @@
 
 .animate-border-glow {
   animation: border-glow 3s ease-in-out infinite;
+}
+
+@keyframes gradient-drift {
+  0% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(3%, -2%) scale(1.04); }
+  50% { transform: translate(-2%, 3%) scale(1.02); }
+  75% { transform: translate(1%, -1%) scale(1.06); }
+  100% { transform: translate(0, 0) scale(1); }
+}
+
+.animate-gradient-drift {
+  animation: gradient-drift 20s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* --- Scroll Reveal --- */
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  filter: blur(6px);
+  transition:
+    opacity 800ms ease-in-out,
+    transform 800ms ease-in-out,
+    filter 800ms ease-in-out;
+  will-change: opacity, transform, filter;
+}
+
+.scroll-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* --- Micro-interactions --- */
+
+.micro-hover {
+  transition: transform 200ms ease-out, box-shadow 200ms ease-out;
+  will-change: transform;
+}
+
+.micro-hover:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 20px rgba(79, 156, 255, 0.12);
+}
+
+.micro-hover:active {
+  transform: scale(0.98);
+  transition-duration: 120ms;
+}
+
+/* --- Reduced motion --- */
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal {
+    opacity: 1;
+    transform: none;
+    filter: none;
+    transition: none;
+  }
+  .animate-ambient-glow,
+  .animate-gradient-drift,
+  .animate-border-glow {
+    animation: none;
+  }
+  .micro-hover:hover {
+    transform: none;
+  }
 }

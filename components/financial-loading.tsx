@@ -178,10 +178,19 @@ export function FinancialLoading() {
   }, [])
 
   return (
-    <div className="min-h-screen bg-background flex flex-col items-center justify-center relative overflow-hidden animate-in fade-in duration-700">
+    <div
+      className="min-h-screen flex flex-col items-center justify-center relative overflow-hidden animate-in fade-in duration-700"
+      style={{ background: "#050505" }}
+    >
       {/* Ambient background glow */}
       <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-primary/5 blur-3xl" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background: "radial-gradient(ellipse 60% 50% at 50% 45%, #0b1e3b 0%, #121212 40%, #050505 100%)",
+          }}
+        />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full animate-ambient-glow" style={{ background: "radial-gradient(ellipse, rgba(11,30,59,0.4) 0%, transparent 70%)" }} />
       </div>
 
       <div className="relative flex flex-col items-center gap-8">

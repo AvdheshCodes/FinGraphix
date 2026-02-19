@@ -98,10 +98,10 @@ export function UploadDropzone() {
   return (
     <Card
       className={cn(
-        "border border-dashed transition-all duration-300 rounded-xl",
+        "border border-dashed rounded-xl",
         "bg-white/[0.04] backdrop-blur-sm",
-        "animate-border-glow",
-        "hover:scale-[1.02] hover:bg-white/[0.06]",
+        "animate-border-glow micro-hover",
+        "hover:bg-white/[0.06]",
         isDragging && "border-primary bg-primary/10 scale-[1.02]",
         error && "border-destructive shadow-none",
         !isDragging && !error && "border-white/[0.12]"
