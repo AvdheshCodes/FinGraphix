@@ -34,10 +34,14 @@ export function VegaChart({ spec, className }: VegaChartProps) {
 
     const embedChart = async () => {
       try {
-        // Modify spec to use container width if it's set to "container"
+        // Normalise schema to v6 and adapt container width
         const vegaSpec = spec as Record<string, unknown>
+        const schema = typeof vegaSpec.$schema === "string"
+          ? vegaSpec.$schema.replace(/\/vega-lite\/v\d+\.json/, "/vega-lite/v6.json")
+          : "https://vega.github.io/schema/vega-lite/v6.json"
         const modifiedSpec = {
           ...vegaSpec,
+          $schema: schema,
           width: vegaSpec.width === "container" ? Math.max(containerWidth - 60, 200) : vegaSpec.width,
           autosize: { type: "fit", contains: "padding" },
         }

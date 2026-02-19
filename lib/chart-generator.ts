@@ -7,7 +7,7 @@ export function generateHistogram(
   colorField?: string
 ): object {
   const spec: Record<string, unknown> = {
-    $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+    $schema: "https://vega.github.io/schema/vega-lite/v6.json",
     width: "container",
     height: 200,
     data: { values: data },
@@ -63,7 +63,7 @@ export function generateBarChart(
   }))
 
   const spec: Record<string, unknown> = {
-    $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+    $schema: "https://vega.github.io/schema/vega-lite/v6.json",
     width: "container",
     height: 200,
     data: { values: chartData },
@@ -108,7 +108,7 @@ export function generateScatter(
     : data
 
   const spec: Record<string, unknown> = {
-    $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+    $schema: "https://vega.github.io/schema/vega-lite/v6.json",
     width: "container",
     height: 200,
     data: { values: sampledData },
@@ -155,7 +155,7 @@ export function generateLineChart(
   })
 
   return {
-    $schema: "https://vega.github.io/schema/vega-lite/v5.json",
+    $schema: "https://vega.github.io/schema/vega-lite/v6.json",
     width: "container",
     height: 200,
     data: { values: sortedData },
