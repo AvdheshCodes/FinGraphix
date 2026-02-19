@@ -127,7 +127,7 @@ function ExploreContent() {
 
   return (
     <div className="min-h-screen bg-background animate-in fade-in duration-500">
-      {/* Dataset info bar at the top (navbar is hidden on this page) */}
+      {/* Dataset info bar - sticks to top when navbar hides on scroll */}
       <div className="sticky top-0 z-30 border-b border-border/50 bg-card/60 backdrop-blur-xl">
         <div className="container mx-auto flex items-center justify-between h-11 px-4">
           <div className="flex items-center gap-3">

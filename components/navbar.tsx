@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useRef, useEffect } from "react"
+import { useState, useRef, useEffect, useCallback } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
@@ -12,17 +12,56 @@ const NAV_ITEMS = [
   { label: "History", href: "/history" },
 ]
 
-const HIDDEN_PATHS = ["/explore", "/processing"]
+const SCROLL_THRESHOLD = 12
+const DEBOUNCE_MS = 50
 
 export function Navbar() {
   const pathname = usePathname()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [sliderStyle, setSliderStyle] = useState<{ left: number; width: number } | null>(null)
   const navRefs = useRef<(HTMLAnchorElement | null)[]>([])
+  const [visible, setVisible] = useState(true)
+  const [atTop, setAtTop] = useState(true)
+  const lastScrollY = useRef(0)
+  const debounceTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
 
-  const shouldHide = HIDDEN_PATHS.some(
-    (p) => pathname === p || pathname.startsWith(p + "/") || pathname.startsWith(p + "?")
-  )
+  const handleScroll = useCallback(() => {
+    if (debounceTimer.current) clearTimeout(debounceTimer.current)
+    debounceTimer.current = setTimeout(() => {
+      const currentY = window.scrollY
+      const isAtTop = currentY <= 0
+
+      setAtTop(isAtTop)
+
+      if (isAtTop) {
+        setVisible(true)
+      } else {
+        const delta = currentY - lastScrollY.current
+        if (delta > SCROLL_THRESHOLD) {
+          setVisible(false)
+        } else if (delta < -SCROLL_THRESHOLD) {
+          setVisible(true)
+        }
+      }
+
+      lastScrollY.current = currentY
+    }, DEBOUNCE_MS)
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener("scroll", handleScroll)
+      if (debounceTimer.current) clearTimeout(debounceTimer.current)
+    }
+  }, [handleScroll])
+
+  // Reset visibility on route change
+  useEffect(() => {
+    setVisible(true)
+    setAtTop(window.scrollY <= 0)
+    lastScrollY.current = window.scrollY
+  }, [pathname])
 
   const activeIndex = NAV_ITEMS.findIndex(
     (item) => item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
@@ -42,8 +81,8 @@ export function Navbar() {
   return (
     <nav
       className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-400 ease-in-out",
-        shouldHide ? "opacity-0 -translate-y-full pointer-events-none" : "opacity-100 translate-y-0"
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-350 ease-in-out",
+        visible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-full pointer-events-none"
       )}
     >
       <div className="mx-auto max-w-5xl px-4 pt-4">
